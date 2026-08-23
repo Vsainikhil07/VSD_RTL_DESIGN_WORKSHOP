@@ -28,9 +28,9 @@ gtkwave waveform analyser
 - [1.2 Objectives of Logic Optimization](#12-objectives-of-logic-optimization)
 
 ### 2. Combinational Logic Optimization
-- [2.1 AND Gate Optimization — `opt_check`](#21-and-gate-optimization--opt_check)
-- [2.2 OR Gate Optimization — `opt_check2`](#22-or-gate-optimization--opt_check2)
-- [2.3 Three-Input AND Gate Optimization — `opt_check3`](#23-three-input-and-gate-optimization--opt_check3)
+- [2.1 AND Gate Optimization — ](#21-and-gate-optimization)
+- [2.2 OR Gate Optimization — ](#22-or-gate-optimization)
+- [2.3 Three-Input AND Gate Optimization — ](#23-three-input-and-gate-optimization)
 
 ### 3. Sequential Logic Optimization
 - [3.1 Introduction to Sequential Optimization](#31-introduction-to-sequential-optimization)
