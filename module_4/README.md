@@ -26,9 +26,7 @@ This module focuses on understanding the behavior of blocking and non-blocking a
 |   4 | RTL Simulation and Waveform Analysis            |
 |   5 | Synthesis and Netlist Generation                |
 |   6 | Gate-Level Simulation Using Synthesized Netlist |
-|   7 | RTL vs GLS Waveform Comparison                  |
-|   8 | Analysis of Simulation Results                  |
-|   9 | Conclusion                                      |
+|   7 | Conclusion                                      |
 
 # 1. Introduction to Gate-Level Simulation (GLS)
 
@@ -147,6 +145,8 @@ This experiment analyzes an incorrectly coded multiplexer and its effect on RTL 
 ### FUNCTIONAL VERIFICATION:
 <img width="1918" height="707" alt="ternary_mux_netlist" src="https://github.com/user-attachments/assets/64f5d7dc-bd45-4e16-9b67-8a5619f92d82" />
 ````markdown
+# 5. Synthesis and Netlist Generation  
+
 ## Synthesis of Blocking Assignment Circuit
 
 ### Overview
@@ -168,10 +168,12 @@ show
 ```
 
 **Image**
+# 6.Gate-Level Simulation Using Synthesized Netlist
 
 ### Technology-Mapped Circuit
 
-![Uploading Screenshot 2026-08-24 001451.png…]()
+<img width="1007" height="620" alt="Screenshot 2026-08-24 001451" src="https://github.com/user-attachments/assets/1fdc232a-31f4-4077-998c-91054415ad62" />
+
 
 [blocking cavaet ]
 <img width="955" height="457" alt="blocking caveat waveform" src="https://github.com/user-attachments/assets/00d7039a-c1f1-496b-a66c-ece89a21afe2" />
@@ -180,5 +182,16 @@ show
 ### Observation
 
 The synthesized circuit represents the blocking-assignment logic after technology mapping and shows how the RTL design is implemented using SKY130 standard cells.
-````
+# Overall Result
 
+
+
+The experiments successfully demonstrated multiplexer design, blocking assignment behavior, RTL simulation, waveform analysis, and synthesis using Yosys. The results highlighted how coding style and incomplete assignments can affect circuit behavior and lead to synthesis-simulation differences. The designs were also synthesized and mapped using the SKY130 standard-cell library.
+
+---
+
+# 7.Conclusion
+
+
+
+This module provided a practical understanding of RTL design, multiplexer implementation, blocking assignment behavior, and synthesis-simulation mismatches. The experiments demonstrated how different Verilog coding styles are interpreted during simulation and synthesis, and how incomplete or inappropriate assignments can result in unintended hardware behavior. Waveform analysis using GTKWave helped verify the functional behavior of the RTL designs, while Yosys synthesis provided insight into their corresponding gate-level implementations. The designs were further mapped to the SKY130 standard-cell library, providing practical exposure to the RTL-to-gate-level design flow. Overall, the experiments emphasized the importance of writing complete, synthesizable, and logically consistent RTL code for reliable digital hardware design.
