@@ -22,9 +22,8 @@ The module covers:
 - Physical Design Results
 - Design-Space Exploration
 
-**Image: ASIC Physical Design Flow**
 
-> Add a clean ASIC physical-design flow diagram here.
+
 
 ---
 
