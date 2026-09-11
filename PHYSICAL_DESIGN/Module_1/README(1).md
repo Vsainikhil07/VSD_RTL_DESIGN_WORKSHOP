@@ -72,10 +72,6 @@ Final Layout
 
 Each stage contributes to converting the logical design into a physically valid and manufacturable layout.
 
-**Image: Physical Design Flow**
-
-> Add physical-design flow screenshot or diagram here.
-
 ---
 
 ## Floorplanning
@@ -98,7 +94,8 @@ Proper floorplanning helps achieve good **area, timing, power, and routability**
 
 **Image: Floorplan**
 
-> Add floorplan screenshot here.
+<img width="1218" height="657" alt="image" src="https://github.com/user-attachments/assets/846d81bc-7b15-4acd-95e9-ae2f25bf966e" />
+
 
 ---
 
@@ -117,7 +114,8 @@ The Power Distribution Network (PDN) connects the power sources to standard cell
 
 **Image: Power Distribution Network**
 
-> Add PDN / power-grid screenshot here.
+<img width="1218" height="622" alt="image" src="https://github.com/user-attachments/assets/9f31fdc5-4bcf-47ca-821e-6ae979cf20bf" />
+
 
 ---
 
@@ -135,7 +133,8 @@ The objective is to achieve good cell distribution while reducing congestion and
 
 **Image: Standard-Cell Placement**
 
-> Add placement screenshot here.
+<img width="1192" height="635" alt="image" src="https://github.com/user-attachments/assets/f3e48fe4-b28d-4ee2-b511-1d4feeb36dc3" />
+
 
 ---
 
@@ -157,7 +156,8 @@ A well-designed clock tree helps maintain reliable timing across the design.
 
 **Image: Clock Tree**
 
-> Add CTS screenshot here.
+
+
 
 ---
 
@@ -174,7 +174,8 @@ Routing must satisfy connectivity and technology-specific design rules while min
 
 **Image: Routed Layout**
 
-> Add routing screenshot here.
+
+
 
 ---
 
@@ -194,7 +195,8 @@ Violations can be addressed using techniques such as:
 
 **Image: Antenna Check**
 
-> Add antenna report or violation screenshot here.
+
+
 
 ---
 
@@ -223,7 +225,7 @@ OpenSTA can be used to analyze timing after physical implementation.
 
 **Image: STA Report**
 
-> Add timing report screenshot here.
+
 
 ---
 
@@ -237,9 +239,9 @@ The extracted information is commonly stored in **SPEF (Standard Parasitic Excha
 
 The extracted parasitics can then be used for more accurate timing analysis.
 
-**Image: SPEF / Parasitic Extraction**
 
-> Add SPEF file or extraction report screenshot here.
+
+
 
 ---
 
@@ -267,7 +269,8 @@ A successful LVS indicates that the physical layout represents the intended circ
 
 **Image: DRC / LVS Results**
 
-> Add DRC and LVS result screenshots here.
+<img width="1232" height="591" alt="image" src="https://github.com/user-attachments/assets/0b38d169-b443-4d6f-a9a4-5c537e2ec86d" />
+
 
 ---
 
@@ -277,9 +280,6 @@ Logic Equivalence Checking verifies that the synthesized or optimized design mai
 
 It helps ensure that implementation and optimization steps have not changed the intended functionality.
 
-**Image: Logic Equivalence Check**
-
-> Add equivalence-check result screenshot here.
 
 ---
 
@@ -311,7 +311,8 @@ This makes it useful for learning and experimenting with ASIC physical implement
 
 **Image: OpenLane Flow**
 
-> Add OpenLane flow or terminal screenshot here.
+<img width="1091" height="531" alt="image" src="https://github.com/user-attachments/assets/fa1513ee-cf48-42e2-998d-30fd6f200ce3" />
+
 
 ---
 
@@ -330,7 +331,8 @@ It supports important physical-design operations such as:
 
 **Image: OpenROAD**
 
-> Add OpenROAD execution or tool-flow screenshot here.
+<img width="1086" height="590" alt="image" src="https://github.com/user-attachments/assets/7ece4244-25ec-4acc-ac25-9810ed3bc08e" />
+
 
 ---
 
@@ -353,7 +355,8 @@ These files allow the design to be implemented and verified according to the tar
 
 **Image: SKY130 PDK**
 
-> Add SKY130 PDK / library screenshot here.
+<img width="1220" height="578" alt="image" src="https://github.com/user-attachments/assets/fe3ca110-dfb1-40d4-9875-42b71151b393" />
+
 
 ---
 
@@ -373,9 +376,7 @@ Important configuration areas include:
 
 Different configurations can produce different area, timing, and routing results.
 
-**Image: OpenLane Configuration**
 
-> Add `config.tcl` or configuration screenshot here.
 
 ---
 
@@ -403,9 +404,6 @@ Final Layout
 
 OpenLane automates these stages while using the technology information provided by the SKY130 PDK.
 
-**Image: Physical Implementation**
-
-> Add OpenLane implementation result or terminal screenshot here.
 
 ---
 
@@ -429,9 +427,7 @@ Design
 
 The flow generates intermediate results, reports, logs, and final physical-design outputs.
 
-**Image: Project Execution**
 
-> Add terminal / OpenLane execution screenshot here.
 
 ---
 
@@ -451,9 +447,6 @@ The final implementation can be evaluated using important physical-design metric
 | LVS | Checks layout-to-netlist connectivity |
 | Antenna | Checks antenna-related violations |
 
-**Image: Physical Design Results**
-
-> Add final reports / metrics screenshot here.
 
 ---
 
@@ -480,9 +473,43 @@ Comparing different configurations helps identify a suitable implementation.
 
 **Image: Design-Space Exploration**
 
-> Add comparison table, report, or screenshot here.
+
+
 
 ---
+
+
+---
+# Terminal Execution And Screenshots
+
+### 1. PDK Directory and Library Setup
+
+<img width="1233" height="603" alt="image" src="https://github.com/user-attachments/assets/795cf9ec-fd32-4cce-8546-3549d6592a85" />
+
+
+### 2. Sky130 Standard Cell Library Verification
+
+<img width="516" height="501" alt="image" src="https://github.com/user-attachments/assets/f6e17386-2ba3-412a-9be3-0d15c65d1697" />
+
+### 3. OpenLane Environment Setup
+<img width="1233" height="599" alt="image" src="https://github.com/user-attachments/assets/697eaef0-692b-419c-ba50-b97f41fbd539" />
+
+
+### 4. LEF and Library File Verification
+
+<img width="512" height="501" alt="image" src="https://github.com/user-attachments/assets/281847f8-8903-4fe5-92f8-4da13ea8a9e7" />
+
+### 5. OpenLane Flow Execution
+<img width="512" height="503" alt="image" src="https://github.com/user-attachments/assets/282b4c0c-a7bd-4a11-8286-f25000c41ee8" />
+
+
+### 6. OpenLane Configuration
+<img width="522" height="507" alt="image" src="https://github.com/user-attachments/assets/407566d1-c61c-4663-9acf-6ee16384b633" />
+
+
+
+### 7. Floorplan Configuration
+<img width="512" height="502" alt="image" src="https://github.com/user-attachments/assets/b27dd793-77e1-4a5f-8f34-b074e0cca418" />
 
 ## Key Learnings
 
@@ -505,8 +532,6 @@ Through this module, the following concepts were studied:
 
 The module provided practical understanding of how different physical-design stages are connected and how implementation parameters influence the final design.
 
----
-
 ## Conclusion
 
 This module provided practical exposure to the **ASIC Physical Design flow using OpenLane and the SKY130 PDK**.
@@ -517,7 +542,3 @@ The work demonstrated the importance of proper physical planning, placement, clo
 
 ---
 
-## Author
-
-**Vadla Sai Nikhil**  
-**Anurag University, ECE — 3rd Year**
