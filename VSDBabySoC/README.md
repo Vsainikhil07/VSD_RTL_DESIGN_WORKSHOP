@@ -18,14 +18,14 @@ This repository contains my practical learning activities in RTL design and VLSI
 - [Module 5](./Module_5/README.md)
 
 ### Physical Design Modules
-- [Physical Design – Module 1](./PHYSICAL_DESIGN/Module_1/README.md)
-- [Physical Design – Module 2](./PHYSICAL_DESIGN/Module_2/README.md)
-- [Physical Design – Module 3](./PHYSICAL_DESIGN/Module_3/README.md)
-- [Physical Design – Module 4](./PHYSICAL_DESIGN/Module_4/README.md)
-- [Physical Design – Module 5](./PHYSICAL_DESIGN/Module_5/README.md)
+- [Physical Design – Module 1](./PHYSICAL_DESIGN/Module_1/)
+- [Physical Design – Module 2](./PHYSICAL_DESIGN/Module_2/)
+- [Physical Design – Module 3](./PHYSICAL_DESIGN/Module_3/)
+- [Physical Design – Module 4](./PHYSICAL_DESIGN/Module_4/)
+- [Physical Design – Module 5](./PHYSICAL_DESIGN/Module_5/)
 
 ### Other Sections
-- [Assessment](./Assesment/)
+- [Assessment](./Assessment/)
 - [Session 1](./Session%20-1/)
 - [Session 2](./Session-2/)
 - [VSDBabySoC](./VSDBabySoC/README.md)
