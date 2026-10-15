@@ -1,8 +1,8 @@
 # RTL Design, Synthesis & Physical Design Workshop
 
-**A collection of hands-on experiments in Verilog RTL design, functional verification, logic synthesis, optimization, timing analysis, and open-source ASIC implementation.**
+A collection of hands-on experiments in Verilog RTL design, functional verification, logic synthesis, optimization, and open-source VLSI implementation.
 
-This repository documents my practical learning activities in RTL design and VLSI implementation. It covers Verilog programming, testbench development, waveform analysis, logic synthesis using Yosys, gate-level simulation, RISC-V experiments, and physical design using open-source EDA tools with the SKY130 PDK.
+This repository documents my practical learning activities in RTL design and digital hardware implementation. It includes Verilog programming, simulation, testbench development, waveform analysis, logic synthesis, synthesis optimization, and practical assignments. It also documents my ongoing exploration of open-source physical design tools and the SKY130 technology platform.
 
 ---
 
@@ -10,49 +10,49 @@ This repository documents my practical learning activities in RTL design and VLS
 
 | Section | Description |
 |---|---|
-| **RTL Design and Synthesis** | Verilog coding, functional simulation, logic synthesis, and RTL optimization |
-| **Physical Design** | Floorplanning, standard-cell placement, clock tree synthesis, routing, and timing analysis |
-| **Assessment** | Practical assessment tasks and related design implementations |
-| **Practical Sessions** | Hands-on exercises involving RTL verification, synthesis, and physical design |
-| **VSDBabySoC** | Practical exploration of a RISC-V-based System-on-Chip |
-| **Tools and Technologies** | Open-source EDA tools and the SKY130 technology platform |
+| **RTL Design Modules** | Verilog programming, digital logic implementation, simulation, synthesis, and optimization |
+| **Physical Design Modules** | Practical exploration of the ASIC physical design flow using open-source EDA tools |
+| **Assessment** | Practical assignments and Verilog-based design exercises, including a sequence detector |
+| **Practical Sessions** | Hands-on exercises involving RTL simulation, synthesis, and verification |
+| **VSDBabySoC** | Practical work associated with the VSDBabySoC project |
+| **Tools and Technologies** | Open-source EDA tools used for RTL design, verification, synthesis, and physical design |
 
 ---
 
 # RTL Design and Synthesis
 
-This section documents practical exercises involving digital logic design, RTL development, simulation, verification, and synthesis.
+This section documents practical exercises in digital logic design using Verilog HDL. The work focuses on developing RTL code, testing functionality, understanding synthesized logic, and exploring optimization techniques.
 
 ## Module 0 – Workshop Setup
 
 **Topics Covered**
-- Workshop introduction and overview
+- Introduction to the workshop and its objectives
 - Laboratory environment setup
-- Installation and configuration of EDA tools
-- Development environment preparation
+- EDA tool installation and configuration
+- Preparation of the development environment
 
 ## Module 1 – RTL Design Fundamentals
 
 **Topics Covered**
-- Digital design and RTL fundamentals
-- Verilog HDL programming
-- Combinational circuit development
-- Testbench creation
-- Simulation using Icarus Verilog
-- Waveform inspection using GTKWave
+- Fundamentals of digital design and RTL
+- Introduction to Verilog HDL
+- Combinational logic implementation
+- Testbench development
+- Functional simulation using Icarus Verilog
+- Waveform analysis using GTKWave
 - Introduction to logic synthesis
 
 ## Module 2 – RTL Design and Synthesis
 
 **Topics Covered**
 - Verilog module implementation
-- Hierarchical design and module connectivity
+- Module connectivity and hierarchical design
 - Multi-module RTL development
 - Functional simulation and verification
 - Logic synthesis using Yosys
 - Gate-level netlist generation
 - Technology mapping
-- Synthesis output analysis
+- Analysis of synthesis results
 
 ## Module 3 – RTL Optimization
 
@@ -70,11 +70,10 @@ This section documents practical exercises involving digital logic design, RTL d
 - RTL functional verification
 - Gate-Level Simulation (GLS)
 - Blocking and non-blocking assignments
-- Comparison of RTL and synthesized circuit behavior
+- Comparison of RTL and synthesized netlist behavior
 - Multiplexer implementation and testing
 - Testbench-based verification
-- Netlist inspection
-- Debugging common RTL issues
+- Netlist inspection and debugging
 
 ## Module 5 – Synthesis Optimization
 
@@ -90,80 +89,75 @@ This section documents practical exercises involving digital logic design, RTL d
 
 ---
 
+# Assessment and Practical Assignments
+
+This section contains practical assessment work and assignments involving digital logic design and hardware description using Verilog HDL.
+
+The exercises provide opportunities to apply RTL coding concepts, develop functional hardware descriptions, and verify circuit behavior through simulation.
+
+## Sequence Detector
+
+The sequence detector assessment focuses on implementing a digital circuit that identifies a specified input sequence.
+
+**Areas of Work**
+- Understanding the required input sequence
+- Developing the Verilog RTL implementation
+- Handling sequential input data
+- Testing the design using a testbench
+- Simulating the circuit and observing its behavior
+- Verifying the detection output for different input sequences
+
+## Other Assignments
+
+The repository also includes assignment-related material provided as part of the workshop.
+
+These assignments support practical learning and help reinforce concepts related to Verilog programming, digital logic implementation, simulation, and verification.
+
+---
+
 # Physical Design
 
-Physical design converts a synthesized logical circuit into a physical layout that can be manufactured as an ASIC.
+This section documents practical learning and experiments related to the ASIC physical design flow using open-source EDA tools and the SKY130 Process Design Kit (PDK).
 
 **Topics Covered**
 - Introduction to open-source EDA tools
-- SKY130 Process Design Kit (PDK)
+- SKY130 PDK and standard-cell library concepts
 - RTL-to-GDSII implementation flow
-- Chip floorplanning and core utilization
-- Power Distribution Network (PDN) construction
-- Standard-cell placement and optimization
-- Standard-cell layout and characterization
-- Static Timing Analysis (STA)
-- Setup and hold timing analysis
+- Floorplanning and core utilization
+- Standard-cell placement
+- Power Distribution Network (PDN) concepts
+- Timing analysis fundamentals
 - Clock Tree Synthesis (CTS)
 - Global and detailed routing
-- Design Rule Checking (DRC)
-- Post-route timing analysis and verification
+- Layout verification concepts
+
+The physical design work builds on the fundamentals of digital logic and synthesis to explore how a logical design progresses toward a physical chip layout.
 
 ---
 
 # Practical Sessions
 
-The practical sessions provide additional experience in RTL development, processor-related experiments, simulation, synthesis, and physical design.
+The practical sessions provide additional hands-on experience with RTL design, simulation, synthesis, and verification.
 
-## Session 1 – RISC-V and OpenROAD
+## Session 1
 
-**Topics Covered**
-- Introduction to RISC-V architecture
-- Development environment setup
-- C program compilation
-- Assembly inspection using `objdump`
-- Program execution using Spike
-- RTL simulation and waveform analysis
-- Introduction to OpenROAD
-- RTL-to-GDSII workflow exploration
+This session documents the practical exercises completed as part of the first workshop session.
 
-## Session 2 – RTL Simulation and Synthesis
+The work focuses on the tools, commands, and procedures introduced during the session.
 
-**Topics Covered**
-- Yosys synthesis workflow
-- Multiplexer implementation and optimization
-- Verilog testbench development
-- Functional simulation
-- Synthesized netlist inspection
-- Gate-Level Simulation
-- Comparison of RTL and gate-level behavior
+## Session 2
+
+This session documents additional practical exercises involving RTL simulation, synthesis, and design verification.
+
+The work emphasizes understanding circuit functionality, examining simulation results, and comparing RTL behavior with synthesized implementations.
 
 ---
 
-# Assessment
+# VSDBabySoC
 
-The assessment section documents practical tasks designed to evaluate RTL design, Verilog programming, digital logic implementation, and functional verification skills.
+This section contains practical work associated with the VSDBabySoC project.
 
-**Areas of Work**
-- Verilog module development
-- Sequential and combinational logic design
-- Testbench creation and functional verification
-- Simulation and waveform analysis
-- Debugging and result analysis
-
----
-
-# VSDBabySoC Project
-
-VSDBabySoC provides practical exposure to the design and implementation of a RISC-V-based System-on-Chip.
-
-**Areas of Exploration**
-- RISC-V processor architecture
-- System-on-Chip design concepts
-- RTL integration and module connectivity
-- Design configuration and synthesis
-- Physical design implementation
-- Timing analysis and verification
+It documents the project-related activities and experiments carried out during the workshop. The section will be updated as further implementation and verification work is completed.
 
 ---
 
@@ -172,37 +166,34 @@ VSDBabySoC provides practical exposure to the design and implementation of a RIS
 | Tool / Technology | Purpose |
 |---|---|
 | **Verilog HDL** | Hardware description and RTL design |
-| **Icarus Verilog** | RTL and gate-level simulation |
+| **Icarus Verilog** | RTL simulation |
 | **GTKWave** | Waveform visualization |
 | **Yosys** | Logic synthesis and technology mapping |
 | **SKY130 PDK** | Open-source process design kit |
-| **OpenLANE** | ASIC implementation workflow |
-| **OpenROAD** | Physical design and routing |
+| **OpenLANE** | ASIC implementation flow |
+| **OpenROAD** | Physical design implementation |
 | **OpenSTA** | Static Timing Analysis |
-| **TritonCTS** | Clock tree synthesis |
-| **TritonRoute** | Detailed routing |
 | **Magic** | Layout editing and design rule checking |
 | **ngspice** | Circuit simulation |
 | **Git** | Version control |
 | **GitHub** | Repository hosting and documentation |
-| **Linux Terminal** | EDA tool execution and automation |
+| **Linux Terminal** | Tool execution and workflow management |
 
 ---
 
 # Learning Outcomes
 
-Through these practical activities, I have explored:
+Through these practical activities, I am developing an understanding of:
 
-- Developing and verifying Verilog RTL designs.
-- Creating testbenches and debugging simulation results.
-- Understanding logic synthesis and technology mapping.
-- Inspecting gate-level netlists and simulation behavior.
-- Learning RTL optimization techniques.
-- Working with open-source ASIC design tools.
-- Understanding floorplanning, placement, and routing.
-- Studying timing analysis and clock tree synthesis.
-- Exploring RISC-V and System-on-Chip design concepts.
-- Understanding the overall RTL-to-GDSII implementation process.
+- Writing Verilog RTL for digital logic circuits.
+- Developing testbenches and verifying circuit functionality.
+- Running simulations and interpreting waveforms.
+- Performing logic synthesis using Yosys.
+- Understanding technology mapping and gate-level netlists.
+- Exploring RTL optimization techniques.
+- Debugging functional issues in digital designs.
+- Learning the fundamentals of ASIC physical design.
+- Exploring open-source EDA tools and the SKY130 platform.
 
 ---
 
@@ -213,7 +204,7 @@ Through these practical activities, I have explored:
 - **College:** Anurag University
 - **Branch:** Electronics and Communication Engineering (ECE)
 
-This repository documents my practical work and learning in RTL design, digital verification, synthesis optimization, timing analysis, and open-source VLSI design.
+This repository documents my ongoing practical learning in RTL design, digital verification, synthesis, optimization, and open-source VLSI implementation.
 
 ---
 
