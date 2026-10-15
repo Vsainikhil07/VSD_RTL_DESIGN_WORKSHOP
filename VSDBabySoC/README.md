@@ -9,17 +9,26 @@ This repository contains my practical learning activities in RTL design and VLSI
 
 ## Quick Navigation
 
-- [Repository Overview](#repository-overview)
-- [RTL Design and Synthesis](#rtl-design-and-synthesis)
-- [Module 0 – Workshop Setup](#module-0--workshop-setup)
-- [Module 1 – RTL Design Fundamentals](#module-1--rtl-design-fundamentals)
-- [Module 2 – RTL Design and Synthesis](#module-2--rtl-design-and-synthesis)
-- [Module 3 – RTL Optimization](#module-3--rtl-optimization)
-- [Module 4 – Simulation and Synthesis Verification](#module-4--simulation-and-synthesis-verification)
-- [Module 5 – Synthesis Optimization](#module-5--synthesis-optimization)
-- [Physical Design Modules](#physical-design-modules)
-- [Mid-Term Practical Work](#mid-term-practical-work)
-- [My Assignments](#my-assignments)
+### RTL Design Modules
+- [Module 0](./Module_0/README.md)
+- [Module 1](./Module_1/README.md)
+- [Module 2](./Module_2/README.md)
+- [Module 3](./Module_3/README.md)
+- [Module 4](./Module_4/README.md)
+- [Module 5](./Module_5/README.md)
+
+### Physical Design Modules
+- [Physical Design – Module 1](./PHYSICAL_DESIGN/Module_1/README.md)
+- [Physical Design – Module 2](./PHYSICAL_DESIGN/Module_2/README.md)
+- [Physical Design – Module 3](./PHYSICAL_DESIGN/Module_3/README.md)
+- [Physical Design – Module 4](./PHYSICAL_DESIGN/Module_4/README.md)
+- [Physical Design – Module 5](./PHYSICAL_DESIGN/Module_5/README.md)
+
+### Other Sections
+- [Assessment](./Assesment/)
+- [Session 1](./Session%20-1/)
+- [Session 2](./Session-2/)
+- [VSDBabySoC](./VSDBabySoC/README.md)
 - [Tools and Technologies](#tools-and-technologies)
 - [Learning Outcomes](#learning-outcomes)
 - [Author](#author)
