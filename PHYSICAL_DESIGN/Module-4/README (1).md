@@ -55,21 +55,6 @@ Setup / Hold Verification
 Physical Sign-off Checks
 ```
 
-## Results and Screenshot Walkthrough
-
-The 22 screenshots are placed throughout this README, directly below the subsection that explains what each image shows. Keep them in these positions rather than collecting all images at the end of the document.
-
-### Screenshot Placement Guide
-
-| Screenshot numbers | Place under this section | What the screenshots cover |
-| --- | --- | --- |
-| 1–3 | **1. Physical Layers and Layout Inspection** | Routing-layer coordinates, Magic layout editor, and standard-cell geometry |
-| 4–8 | **2. Flow Setup and Synthesis** | OpenLane configuration and startup, synthesis/flip-flop mapping, and mapped-cell statistics |
-| 9–15 | **3. Clock Distribution, Layout, and Timing** | STA slack report, clock-tree construction, chip layout, placed-cell wiring, CTS, clock buffers, and crosstalk |
-| 16–20 | **4. Placement Quality and Hold Analysis** | Propagated-clock hold timing, flip-flop hold timing, real-clock timing paths, OpenROAD clock report, and post-CTS skew |
-| 21–22 | **5. Ideal Clock and Setup/Hold Concepts** | Ideal-clock timing analysis and setup/hold timing concepts |
-
-**How to place the images:** Put each screenshot immediately after the explanatory paragraph in its numbered subsection. Keep the existing caption/alt text with the image. If you upload the screenshots to GitHub separately, use stable relative image paths in place of the current image URLs; the URLs copied from the original document may expire.
 
 ### 1. Physical Layers and Layout Inspection
 
@@ -77,19 +62,22 @@ The 22 screenshots are placed throughout this README, directly below the subsect
 
 The coordinate view shows physical geometry associated with the SKY130 routing stack, including `li1`, `met1`, `met2`, `met3`, `met4`, and `met5`. These coordinates help relate logical connectivity to physical locations and routing dimensions.
 
-![Routing-Layer Coordinates](https://private-user-images.githubusercontent.com/313950167/658716705-460b53d1-16d5-4a7f-824b-5758aad39e4e.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3OTIwNjc4NTYsIm5iZiI6MTc5MjA2NzU1NiwicGF0aCI6Ii8zMTM5NTAxNjcvNjU4NzE2NzA1LTQ2MGI1M2QxLTE2ZDUtNGE3Zi04MjRiLTU3NThhYWQzOWU0ZS5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYxMDE1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MTAxNVQxMjMyMzZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1mOTQ1ZWQzMzYzNjQ2NTQzOGExNzA4Y2FhOTJhNWYyN2NkY2Y3YWYxNGQ4M2VhNjY4YjdmODI5Nzg2ZDg5M2ZmJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.kS6G4_drHVVxTzkmCzzSAoV2ddA8ljdVmR8X8s63_-o)
+<img width="1141" height="648" alt="image" src="https://github.com/user-attachments/assets/935c640e-10db-4e13-bfe1-79cdbb318e82" />
+
 
 #### 1.2 Magic layout editor
 
 The Magic session displays process layers such as diffusion, polysilicon, contacts, and metal, together with the layout grid. It is useful for inspecting geometry and investigating physical-design rule issues.
 
-![Magic Layout Editor](https://private-user-images.githubusercontent.com/313950167/658718248-e5af02df-e4c8-4eeb-88ed-fdaaa12585bf.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3OTIwNjc4NTYsIm5iZiI6MTc5MjA2NzU1NiwicGF0aCI6Ii8zMTM5NTAxNjcvNjU4NzE4MjQ4LWU1YWYwMmRmLWU0YzgtNGVlYi04OGVkLWZkYWFhMTI1ODViZi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYxMDE1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MTAxNVQxMjMyMzZaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT02NzU5MzQ3YjI1ODcyM2EzNzA0NDY4MzQwYTI1YzgwMGUyNWFmZWNiZDgxY2QzOTQyZTQ4YWRiOTNkOTBiMWM0JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.Iwe4J4LOpvhQVlxQez8GK4AyjgHA1FIByURN0DOAvQA)
+<img width="1142" height="563" alt="image" src="https://github.com/user-attachments/assets/05bdfb0d-bdcb-4634-aecd-f86264922675" />
+
 
 #### 1.3 Standard-cell geometry close-up
 
 This view highlights the physical structures inside a standard cell, including interconnect, diffusion regions, polysilicon gates, contacts, transistor structures, and power connections.
 
-![Zoomed Standard-Cell Geometry](https://private-user-images.githubusercontent.com/313950167/658722710-7e80e3b9-9f55-4630-ba6a-898a4e29c2df.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3OTIwNjc4NTcsIm5iZiI6MTc5MjA2NzU1NywicGF0aCI6Ii8zMTM5NTAxNjcvNjU4NzIyNzEwLTdlODBlM2I5LTlmNTUtNDYzMC1iYTZhLTg5OGE0ZTI5YzJkZi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYxMDE1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MTAxNVQxMjMyMzdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1jNjI3M2JmNWNiMzhkZDE4NGRiNzYzYTBiZjFjYmY0YmJlMGI2MTQ4ODNlODFlNGYzMTEwZDZlNTQ0NjRiYTZiJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.JXcMZtKM4lNvCpMj4d7wj3dXLQ9PVxulheVpfzg-IIA)
+<img width="830" height="502" alt="image" src="https://github.com/user-attachments/assets/161c5f56-a9e4-405a-9e5c-e0db407f4501" />
+
 
 ### 2. Flow Setup and Synthesis
 
@@ -97,13 +85,14 @@ This view highlights the physical structures inside a standard cell, including i
 
 The configuration screenshot shows the reference design settings, including the design name, clock port, target clock period, RTL source, constraints, and library selection. The source configuration uses `picorv32a` and a `4.500 ns` clock period.
 
-![OpenLane Run Configuration](https://private-user-images.githubusercontent.com/313950167/658723298-32023345-9ca1-4fdf-9006-05a9ea94c2eb.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3OTIwNjc4NTcsIm5iZiI6MTc5MjA2NzU1NywicGF0aCI6Ii8zMTM5NTAxNjcvNjU4NzIzMjk4LTMyMDIzMzQ1LTljYTEtNGZkZi05MDA2LTA1YTllYTk0YzJlYi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYxMDE1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MTAxNVQxMjMyMzdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1lNTRiZjFiZWJjMTkyN2I4NDQ0ZDdhMzM4ZGIxNjVmMmFhZjAzZjJmM2I1YjliOWZiOTY2MTNkOTZiM2Q0NzVhJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.IqIta5rA7P-JIvFdFQe92H9oThIEFdsGNxEb_F6Ay7c)
+<img width="1141" height="647" alt="image" src="https://github.com/user-attachments/assets/658bc0d5-3016-4412-8c85-0eedc82dfbb8" />
+
 
 #### 2.2 Starting the OpenLane environment
 
 The terminal view records the OpenLane startup and version information. OpenLane coordinates the main implementation stages through a shell-driven flow.
 
-![Launching OpenLane](https://private-user-images.githubusercontent.com/313950167/658725912-243b5fe3-254d-4398-9045-055a600964c4.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3OTIwNjc4NTcsIm5iZiI6MTc5MjA2NzU1NywicGF0aCI6Ii8zMTM5NTAxNjcvNjU4NzI1OTEyLTI0M2I1ZmUzLTI1NGQtNDM5OC05MDQ1LTA1NWE2MDA5NjRjNC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjYxMDE1JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI2MTAxNVQxMjMyMzdaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0wMGJiYjcyNmE3YWEyODBjNWQ5MmMwNWRkYzc1NTc4NTZjM2E2NzVlMTFiY2E5YWYyYzNiNzg2ZWRmNDQ1NjY3JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZyZXNwb25zZS1jb250ZW50LXR5cGU9aW1hZ2UlMkZwbmcifQ.wGZjwM9ftDFbbAjzoYnmheJm-DD7bgO_nEU-_VFaKRU)
+
 
 #### 2.3 Synthesis and flip-flop mapping
 
