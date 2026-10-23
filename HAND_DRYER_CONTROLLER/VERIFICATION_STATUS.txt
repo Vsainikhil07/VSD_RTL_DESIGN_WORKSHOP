@@ -1,0 +1,70 @@
+DIGITAL HAND-DRYER AUTO-OFF CONTROLLER
+VERIFICATION REPORT
+
+1. RTL FUNCTIONAL VERIFICATION
+--------------------------------
+Tool Used: Icarus Verilog
+Waveform Viewer: GTKWave
+
+The RTL design was simulated using a testbench to verify the functionality of the hand-dryer auto-off controller.
+
+Verification covered:
+- Clock and reset operation.
+- Presence detection.
+- Activation of the dryer output.
+- Drying timer and automatic shut-off behavior.
+- Output behavior during reset and after the drying interval.
+
+Result: 7/7 test cases PASS.
+
+
+2. GATE-LEVEL SIMULATION (GLS)
+--------------------------------
+The synthesized netlist was simulated using the gate-level simulation testbench to verify the functionality of the synthesized design.
+
+Tool Used: Icarus Verilog
+Standard Cell Library: SKY130 HD
+
+Result: 7/7 test cases PASS.
+
+
+3. PHYSICAL DESIGN VERIFICATION
+--------------------------------
+RTL-to-GDSII Flow: OpenLane
+Technology: SkyWater SKY130 HD
+
+The design passed the following physical verification checks:
+
+- Magic DRC: 0 errors.
+- LVS: 0 errors.
+- Antenna Check: 0 violations.
+- CVC: 0 errors.
+- TritonRoute DRC: 0 violations.
+
+The final GDSII layout was generated successfully.
+
+
+4. TIMING VERIFICATION
+--------------------------------
+Clock Period: 20 ns
+Clock Frequency: 50 MHz
+
+Practical Timing Results:
+- Worst Setup Slack: +5.35 ns.
+- Worst Hold Slack: +0.08 ns.
+- Total Negative Slack (TNS): 0.
+
+The reported setup and hold slack values are positive, and the reported TNS is zero.
+
+
+5. FINAL RESULT
+--------------------------------
+The Digital Hand-Dryer Auto-Off Controller completed RTL functional verification, gate-level simulation, synthesis, physical implementation, and GDSII generation.
+
+RTL Simulation: PASS (7/7)
+Gate-Level Simulation: PASS (7/7)
+Physical Verification: PASS for the checks listed above
+Timing Verification: PASS based on the reported practical timing results
+
+Note:
+The Magic and KLayout GDS XOR comparison reported 11,201 differences. This result is recorded separately and is not claimed as a successful layout-equivalence check.
