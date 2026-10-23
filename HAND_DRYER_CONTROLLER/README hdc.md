@@ -1,10 +1,12 @@
 # Digital Hand-Dryer Auto-Off Controller — RTL to GDSII (Sky130 · OpenLane)
 
-A small sequential controller that switches a hand dryer **ON** when a hand is detected and switches it **OFF** automatically a fixed number of clock cycles after the hand is removed. The design is taken through the complete digital VLSI flow — **RTL → simulation → synthesis → gate-level simulation → floorplan → placement → CTS → routing → parasitic extraction → multi-corner STA → GDSII → DRC / LVS / antenna checks** — using open-source tools and the SkyWater **Sky130 HD** library.
+## Project Overview
 
-> Place this file at the root of the `FINAL_SUBMISSION/` folder so all image links below resolve.
+This project implements a small **hand-dryer auto-off controller** in Verilog and documents its implementation through an open-source digital VLSI flow. When a hand is detected, the controller enables the dryer and clears its timer. When the hand is removed, a 7-bit counter counts clock cycles and turns the output off at the configured timeout (`DRY_TIME = 100`). An active-high asynchronous reset immediately disables the output.
 
----
+The project demonstrates the main stages of an RTL-to-GDSII workflow using the **SkyWater Sky130 HD** standard-cell library and OpenLane: RTL simulation, Yosys synthesis, gate-level simulation, floorplanning, placement, clock-tree synthesis, routing, parasitic extraction, static timing analysis, GDS generation, and physical checks. It is intended as an educational digital-design/physical-design project; it is **not** a safety-certified controller for connection to a real hand dryer.
+
+**Project snapshot:** 3 inputs (`clk`, `reset`, `presence`), 1 output (`dryer_enable`), a 20 ns clock constraint (50 MHz), a 7-bit timer counter, and an OpenLane run tagged `util30`. The included reports document the results and limitations of that specific run.
 
 ## 1. Design Specification
 
@@ -15,7 +17,7 @@ A small sequential controller that switches a hand dryer **ON** when a hand is d
 | `presence` | in | 1 | Hand detected (level-sensitive) |
 | `dryer_enable` | out | 1 | Dryer ON/OFF control |
 
-**Parameter:** `DRY_TIME = 100` → counter width `CNT_W = $clog2(100) = 7` bits.
+**Parameter:** `DRY_TIME = 100` → counter width `CNT_W = $clog2(DRY_TIME) = 7` bits for this default value. This width calculation assumes `DRY_TIME > 1`.
 
 **Behaviour (priority order):**
 
@@ -109,13 +111,13 @@ FINAL_SUBMISSION/
 
 ## 3. How to Run the Flow (simple commands)
 
-> The zip does not store the exact launch command. These are the standard OpenLane commands that produce the `runs/util30` folder seen in the logs.
+> The zip does not establish the exact original launch command. These commands document the environment used for the `util30` run; they may need path and environment adjustments on another machine.
 
 **Enter OpenLane and run everything in one shot**
 
 ```bash
 cd ~/Desktop/work/tools/openlane_working_dir/openlane
-docker                                   # alias that opens the OpenLane container
+docker                                   # custom alias/wrapper in this environment; not a universal Docker command
 ./flow.tcl -design hand_dryer_controller -tag util30
 ```
 
@@ -147,8 +149,8 @@ All results land in `designs/hand_dryer_controller/runs/util30/` (`results/`, `r
 
 **Figure 1 — RTL source (`hand_dryer_controller.v`)**
 
-![RTL source]<img width="1920" height="918" alt="rtl_source" src="https://github.com/user-attachments/assets/af04b261-3346-43f6-9879-d5275d6cb187" />
-
+![RTL source]
+<img width="1920" height="918" alt="rtl_source" src="https://github.com/user-attachments/assets/0cdc7eb8-cc70-4f86-83a8-2dedd56325ff" />
 
 ---
 
@@ -160,9 +162,9 @@ All results land in `designs/hand_dryer_controller/runs/util30/` (`results/`, `r
 |---|---|---|
 | 1 | Output OFF during reset | PASS |
 | 2 | ON after a one-cycle `presence` pulse | PASS |
-| 3 | OFF after timeout (105 cycles) | PASS |
+| 3 | OFF after waiting 105 cycles (eventual timeout) | PASS |
 | 4 | Hand held, then removed: still ON 50 cycles after removal | PASS |
-| 5 | OFF after a further 60 cycles | PASS |
+| 5 | OFF after a further 60 cycles following the 50-cycle check | PASS |
 | 6 | Running (ON) just before reset | PASS |
 | 7 | Asynchronous reset clears output without a clock edge | PASS |
 
@@ -174,19 +176,22 @@ vvp rtl_sim
 gtkwave hand_dryer.vcd
 ```
 
-**Figure 2 — Simulation log: 7/7 checks pass, `TEST DONE: ALL PASSED`**
+**Figure 2 — RTL simulation artifacts in the submission folder.** The actual simulator output is preserved in `RTL_SIMULATION/simulation_results.txt`, which records checks 1–7 as PASS and ends with `TEST DONE: ALL PASSED`.
 
-![RTL simulation pass]<img width="1920" height="918" alt="rtl_simulation_pass" src="https://github.com/user-attachments/assets/9a779340-d342-485b-85fc-bd15d4ffe75b" />
+![RTL simulation pass]
+<img width="1920" height="918" alt="rtl_simulation_pass" src="https://github.com/user-attachments/assets/b83b0e4b-46d9-45f3-9ce6-d43471b27bd7" />
 
 
 **Figure 3 — RTL waveform in GTKWave (`clk`, `reset`, `presence`, `dryer_enable`)**
 
-![RTL waveform]<img width="1920" height="918" alt="rtl_waveform" src="https://github.com/user-attachments/assets/7b2da810-4248-4361-ab52-5ef107f359db" />
+![RTL waveform]
+<img width="1920" height="918" alt="rtl_waveform" src="https://github.com/user-attachments/assets/261ea08d-181f-4431-a740-9f4e2e72841e" />
 
 
 **Figure 4 — RTL waveform, second view of the same VCD: output falls at timeout and rises again on the next `presence` pulse**
 
-![RTL waveform timeout]<img width="1837" height="892" alt="GTKWAVE" src="https://github.com/user-attachments/assets/b43d545b-ed59-48a8-8f14-2e879d1633ab" />
+![RTL waveform timeout]
+<img width="1837" height="892" alt="GTKWAVE" src="https://github.com/user-attachments/assets/a8be7207-4da2-4ea8-81bf-60ee63f61ffb" />
 
 
 ---
@@ -203,7 +208,7 @@ cat reports/synthesis/1-yosys_4.stat.rpt                   # cell statistics
 grep -i -E "number of cells|chip area" reports/synthesis/*yosys_4*stat*
 ```
 
-**Result (final design):** **46 cells**, **8 × `dfrtp_2`** (7 counter bits + output register), **chip area 446.68 µm²**, 0 problems from Yosys CHECK.
+**Result (final `util30` synthesis report):** **46 cells**, **8 × `dfrtp_2`** (7 counter bits + output register), **chip area 446.6784 µm²** (rounded to 446.68 µm²), and no reported problems from Yosys CHECK.
 
 | Cell | Count | Cell | Count |
 |---|---|---|---|
@@ -213,31 +218,33 @@ grep -i -E "number of cells|chip area" reports/synthesis/*yosys_4*stat*
 | `o21ai_2` | 2 | `or4_2` | 2 |
 | `and2b_2`, `and3b_2`, `and4b_2`, `o211a_2`, `o311a_2`, `o31a_2` | 1 each | | |
 
-**Figure 5 — Synthesis statistics report (`1-yosys_4.stat.rpt`)**
+**Figure 5 — Synthesis report files in the project view.** The numeric results below are taken from `SYNTHESIS/REPORTS/1-yosys_4.stat.rpt` and the matching `util30` report under `FLOW_EVIDENCE/`.
 
-![Synthesis statistics]<img width="1920" height="918" alt="synthesis_statistics" src="https://github.com/user-attachments/assets/9825dff6-0513-4292-a708-c8ed900fc80b" />
+![Synthesis statistics]<img width="1920" height="918" alt="synthesis_statistics" src="https://github.com/user-attachments/assets/ac734be7-3376-4dbd-bc6c-26253a1e943e" />
 
 
-**Figure 6 — Same report in the terminal. The first lines (133 cells, 1377.57 µm²) are from an earlier backup run with the old 32-bit counter; the report below them is the final `util30` run (46 cells, 446.68 µm²)**
+**Figure 6 — Terminal synthesis statistics.** The screenshot includes an earlier backup result as well as the final report. The final `util30` report is the one stating 46 cells and 446.6784 µm²; the earlier 133-cell / 1377.57 µm² figures are not the final design.
 
-![Synthesised stats]<img width="877" height="737" alt="synthesised stats" src="https://github.com/user-attachments/assets/032ab11d-c24e-4521-8e1f-0af2b4b7a8aa" />
+![Synthesised stats]
+<img width="877" height="737" alt="synthesised stats" src="https://github.com/user-attachments/assets/9836a781-d5a4-4acf-8239-6c3eaa84e297" />
 
 
 **Figure 7 — Gate-level netlist (`hand_dryer_controller_gate_level_netlist.v`) generated by Yosys**
 
-![Gate-level netlist]<img width="1920" height="918" alt="gate_level_netlist" src="https://github.com/user-attachments/assets/41989066-d6dd-4664-a7eb-61afa27948ef" />
+![Gate-level netlist]<img width="1920" height="918" alt="gate_level_netlist" src="https://github.com/user-attachments/assets/b0ac1cc8-ee5d-4a03-901d-c01fd8c8986b" />
 
 
-*(An identical copy of this picture is also kept at `FINAL_SUBMISSION/gate_level_netlist.png`.)*
+*(An identical copy of this picture is also kept at the submission root as `gate_level_netlist.png`.)*
 
 **Figure 8 — Gate-level schematic (Graphviz render of `gate_level.dot`; full-size `gate_level.png` / `gate_level.svg` in `SYNTHESIS/SCHEMATIC/`)**
 
-![Gate-level schematic]<img width="911" height="9142" alt="gate_level" src="https://github.com/user-attachments/assets/b94d9762-4ca9-40b7-bae5-7913e52c6600" />
+![Gate-level schematic]<img width="911" height="9142" alt="gate_level" src="https://github.com/user-attachments/assets/73b16fa0-ad75-4e1c-a764-3f4005f3cd07" />
 
 
 **Figure 9 — Earlier-iteration synthesis log (generic gates, 265 cells, 33 DFFs). This is from the old design before the counter was reduced and is shown only for the before/after comparison — it does *not* describe the final netlist**
 
-![Earlier synthesis log]<img width="947" height="902" alt="sysnthesised netlsit" src="https://github.com/user-attachments/assets/52247161-26ec-492e-a17f-9db306162691" />
+![Earlier synthesis log]
+<img width="947" height="902" alt="sysnthesised netlsit" src="https://github.com/user-attachments/assets/08d68307-2676-4949-a5e1-9f6578d283be" />
 
 
 ---
@@ -259,11 +266,12 @@ gtkwave hand_dryer.vcd
 
 `<sky130 cell models>` = the `sky130_fd_sc_hd` functional Verilog models from your PDK install (add `-I` for the model folders; `GLS/compile_functional.log` shows the include error you get without it). The other `.log` files in `GLS/` are earlier failed compile attempts; the successful run is `GLS/simulation.log`.
 
-**Result:** 7/7 checks PASS, `TEST DONE: ALL PASSED` — gate-level behaviour matches RTL.
+**Result:** `GLS/simulation.log` records checks 1–7 as PASS and ends with `TEST DONE: ALL PASSED`. This is a functional, unit-delay simulation without SDF back-annotation; it supports the tested logic behaviour but is not post-layout timing verification.
 
 **Figure 10 — GLS waveform: internal netlist nets and `counter[0..6]` counting up to the timeout, then `dryer_enable` falling**
 
-![GLS waveform]<img width="1920" height="918" alt="gls_waveform" src="https://github.com/user-attachments/assets/59d1943e-0add-4258-8166-884fa8b07619" />
+![GLS waveform]
+<img width="1920" height="918" alt="gls_waveform" src="https://github.com/user-attachments/assets/99957ed6-dc98-40c0-afea-0b00514521b0" />
 
 
 ---
@@ -290,12 +298,13 @@ cat reports/floorplan/3-verilog2def.core_area.rpt
 
 **Figure 11 — Floorplan view (empty core, tap/end-cap cells, IO pins)**
 
-![Floorplan]<img width="2048" height="2048" alt="floorplan" src="https://github.com/user-attachments/assets/557ffa20-f269-4685-a086-0bcf01f3ec5c" />
+![Floorplan]<img width="2048" height="2048" alt="floorplan" src="https://github.com/user-attachments/assets/1180b0f4-062f-46d2-81dc-cbb73658333f" />
 
 
 **Figure 12 — Floorplan DEF render (`hand_dryer_controller.floorplan.def`). Same stage as Figure 11, rendered with a slightly different view/zoom**
 
-![Floorplan DEF]<img width="2048" height="2048" alt="hand_dryer_controller floorplan def" src="https://github.com/user-attachments/assets/e2712cd8-08d9-46a6-a215-178c1008621d" />
+![Floorplan DEF]
+<img width="2048" height="2048" alt="hand_dryer_controller floorplan def" src="https://github.com/user-attachments/assets/c3bde7ab-d41d-45d3-b1fb-a5be80b23f4b" />
 
 
 ---
@@ -318,17 +327,20 @@ cat logs/placement/11-opendp.log
 
 **Figure 13 — Placement statistics after global placement/resizer (93 instances, 33 % utilization)**
 
-![Placement stats]<img width="822" height="652" alt="placement stats" src="https://github.com/user-attachments/assets/f324b737-9394-42df-bec7-2e83c7bb912c" />
+![Placement stats]
+<img width="822" height="652" alt="placement stats" src="https://github.com/user-attachments/assets/c2cc1d10-8c7a-4790-bd31-16da8d90ad03" />
 
 
 **Figure 14 — Placement statistics after CTS timing repair (96 instances, 35 % utilization)**
 
-![Placement statistics]<img width="856" height="606" alt="placement statistics" src="https://github.com/user-attachments/assets/89a4fac8-e124-4a0f-99dd-363e2bf8acd8" />
+![Placement statistics]
+<img width="856" height="606" alt="placement statistics" src="https://github.com/user-attachments/assets/c55aa5ba-58a7-4052-a264-8d39d4308971" />
 
 
 **Figure 15 — Placed design (`hand_dryer_controller.placement.def`)**
 
-![Placement DEF]<img width="2048" height="2048" alt="hand_dryer_controller placement def" src="https://github.com/user-attachments/assets/8d24c25d-5e42-4f56-b321-a39039b6b84e" />
+![Placement DEF]
+<img width="2048" height="2048" alt="hand_dryer_controller placement def" src="https://github.com/user-attachments/assets/9efe7641-6468-43c2-be9a-0c398f31e4f0" />
 
 
 ---
@@ -346,13 +358,11 @@ cat logs/cts/13-cts.log
 
 **Figure 16 — TritonCTS 2.0 start-up and characterization (log)**
 
-![CTS stats]<img width="785" height="322" alt="cts stats" src="https://github.com/user-attachments/assets/c38c0706-0489-4025-b452-fa982ea7d593" />
-
+![CTS stats](SCREENSHOTS/cts%20stats.png)
 
 **Figure 17 — Layout after CTS (`hand_dryer_controller.cts.def`)**
 
-![CTS DEF]<img width="2048" height="2048" alt="hand_dryer_controller cts def" src="https://github.com/user-attachments/assets/6b2642b8-6ffe-4f13-9bb2-193b925152e2" />
-
+![CTS DEF](SCREENSHOTS/hand_dryer_controller.cts.def.png)
 
 ---
 
@@ -378,8 +388,7 @@ cat reports/final_summary_report.csv
 
 **Figure 18 — Terminal: TritonRoute “0 violations”, GDS file locations and the final summary report values**
 
-![Routing stats]<img width="1856" height="907" alt="Routing stats" src="https://github.com/user-attachments/assets/17e39867-032c-4a5e-9a63-83546fb8713a" />
-
+![Routing stats](SCREENSHOTS/Routing%20stats.png)
 
 ---
 
@@ -405,8 +414,7 @@ cat reports/routing/41-antenna.rpt | tail -5     # antenna check
 
 **Figure 19 — Fully routed layout (`hand_dryer_controller.def`)**
 
-![Routed DEF]<img width="2048" height="2048" alt="hand_dryer_controller def" src="https://github.com/user-attachments/assets/575dad06-f30c-459a-b92d-42670e30b61f" />
-
+![Routed DEF](SCREENSHOTS/hand_dryer_controller.def.png)
 
 ---
 
@@ -451,40 +459,33 @@ grep -H -E 'worst slack|^tns' STA_RERUN/practical/*.log
 
 - **Worst setup slack:** +5.35 ns (practical) / +5.67 ns (ideal) at `ss_n40C_1v28` — a flop-to-flop path through the counter logic.
 - **Worst hold slack:** +0.08 ns (practical) / +0.06 ns (ideal) at `ff_n40C_1v95`.
-- All 32 STA runs exited with code 0; every slack is positive and TNS is 0.00.
+- All 32 included rerun logs (16 corners in each mode) have corresponding zero exit-code files; every reported setup/hold slack is positive and TNS is 0.00. The rerun logs show minimum hold slack of +0.08 ns (practical) and +0.06 ns (ideal). **Note:** the bundled `VERIFICATION_STATUS.txt` currently lists different hold figures (+2.53 ns / +2.54 ns); that summary file is inconsistent with the individual `STA_RERUN` logs and should be corrected.
 
 **Figure 20 — 16-corner summary table (setup and hold, ideal/practical)**
 
-![16 corner STA results]<img width="886" height="876" alt="16 corner sta results" src="https://github.com/user-attachments/assets/e54ec5eb-746d-45a7-a82d-d1ecf3abaa26" />
-
+![16 corner STA results](SCREENSHOTS/16%20corner%20sta%20results.png)
 
 **Figure 21 — Ideal vs practical results side by side**
 
-![STA ideal vs practical]<img width="627" height="610" alt="sta results ideal vs practical" src="https://github.com/user-attachments/assets/1d05ad49-a574-4a0c-855b-933c4863092f" />
-
+![STA ideal vs practical](SCREENSHOTS/sta%20results%20ideal%20vs%20practical.png)
 
 *(`SCREENSHOTS/sta results udeal vs practical.png` is a byte-identical duplicate of Figure 21 with a typo in the file name.)*
 
 **Figure 22 — Output of `sta_all.sh` (setup/hold worst slack for every corner, ideal-clock run)**
 
-![STA worst slack]
-
+![STA worst slack](SCREENSHOTS/sta_worst_slack.png)
 
 **Figure 23 — TT corner (25 °C, 1.80 V) summary: setup +15.05 ns, hold +0.27 ns, TNS 0.00**
 
-![STA TT corner]![Uploading sta tt croner.png…]()
-
+![STA TT corner](SCREENSHOTS/sta%20tt%20croner.png)
 
 **Figure 24 — TT corner timing paths: setup path `_76_` → `dryer_enable` (output), hold path `_76_` → `_77_`**
 
-![STA timing path]
+![STA timing path](SCREENSHOTS/sta%20timing%20path.png)
 
+**Figure 25 — Screenshot saved under a misleading filename.** Its caption in the original evidence identifies a TT-corner path, while the filename refers to the SS −40 °C / 1.28 V corner. For the actual worst setup result (+5.35 ns practical), use the text report `STA_EVIDENCE/STA_RERUN/practical/ss_n40C_1v28.log` rather than relying on this screenshot filename.
 
-**Figure 25 — TT 25 °C / 1.80 V worst setup path (slack +15.05 ns). The file is named `STA_SS_N40C_1V28_…` but the content is the TT corner; the real SS −40 °C 1.28 V worst setup path (+5.35 ns) is in `STA_EVIDENCE/STA_RERUN/practical/ss_n40C_1v28.log`**
-
-![STA worst setup path]
-
-
+![STA worst setup path](STA_EVIDENCE/SCREENSHOTS/STA_SS_N40C_1V28_Worst_Setup_Path.png.png)
 
 ---
 
@@ -518,13 +519,11 @@ magic -T $PDK_ROOT/sky130A/libs.tech/magic/sky130A.tech
 
 **Figure 26 — Final layout rendered from the Magic GDS**
 
-![Magic GDS]![Uploading hand_dryer_controller.magic_gds.png…]()
-
+![Magic GDS](SCREENSHOTS/hand_dryer_controller.magic_gds.png)
 
 **Figure 27 — Final layout rendered from the KLayout GDS**
 
-![KLayout GDS]![Uploading hand_dryer_controller.gds.png…]()
-
+![KLayout GDS](SCREENSHOTS/hand_dryer_controller.gds.png)
 
 **Figure 28 — XOR GDS render (difference layout between the Magic and KLayout GDS files)**
 
@@ -540,7 +539,7 @@ magic -T $PDK_ROOT/sky130A/libs.tech/magic/sky130A.tech
 
 | Area | Result |
 |---|---|
-| Design | 4-port sequential controller, `DRY_TIME = 100`, 7-bit counter, async reset |
+| Design | 3-input / 1-output sequential controller, `DRY_TIME = 100`, 7-bit counter, async reset |
 | Functional verification | RTL sim 7/7 PASS · GLS 7/7 PASS |
 | Synthesis | 46 cells (8 flip-flops), 446.68 µm² (old 32-bit version: 133 cells, 1377.57 µm²) |
 | Floorplan | Die 49.625 × 60.345 µm, core 38.18 × 38.08 µm, 30 % utilization, 44 tap/end-cap cells |
@@ -563,7 +562,7 @@ magic -T $PDK_ROOT/sky130A/libs.tech/magic/sky130A.tech
 ## 16. Notes and Limitations
 
 - These results are **not claimed as full industry sign-off.**
-- **KLayout XOR** reported 11,201 differences between the Magic and KLayout GDS files, and `klayout_violations` is `-1` in `final_summary_report.csv`. DRC and LVS in this flow were run on the Magic layout; the XOR result should be reviewed before claiming the two GDS files are equivalent.
+- **KLayout XOR** reported 11,201 differences between the Magic and KLayout GDS files, and `klayout_violations` is `-1` in `final_summary_report.csv`. Treat `-1` as unavailable/invalid unless the report definition says otherwise. DRC and LVS in this flow were run on the Magic layout; the XOR result remains unresolved, so do not claim that the two GDS files are equivalent.
 - OpenSTA warned that `sky130_fd_sc_hd__tapvpwrvgnd_1` was missing from the synthesized netlist and created a black box for `PHY_28`; there are also Liberty `default_fanout_load` warnings.
 - GLS uses functional (unit-delay) models without SDF back-annotation, so it checks logic equivalence, not post-layout timing.
 - The core is very small, so OpenLane used a minimized power grid.
