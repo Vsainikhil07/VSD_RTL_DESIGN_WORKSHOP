@@ -1,4 +1,4 @@
-# Digital Hand-Dryer Auto-Off Controller — RTL to GDSII (Sky130 · OpenLane)
+ Digital Hand-Dryer Auto-Off Controller — RTL to GDSII (Sky130 · OpenLane)
 
 ## Project Overview
 
@@ -358,11 +358,15 @@ cat logs/cts/13-cts.log
 
 **Figure 16 — TritonCTS 2.0 start-up and characterization (log)**
 
-![CTS stats](SCREENSHOTS/cts%20stats.png)
+![CTS stats]
+<img width="785" height="322" alt="cts stats" src="https://github.com/user-attachments/assets/46fdc5a5-309a-4208-a7e3-ac0d3fa67aa6" />
+
 
 **Figure 17 — Layout after CTS (`hand_dryer_controller.cts.def`)**
 
-![CTS DEF](SCREENSHOTS/hand_dryer_controller.cts.def.png)
+![CTS DEF]
+<img width="2048" height="2048" alt="hand_dryer_controller cts def" src="https://github.com/user-attachments/assets/18f8ff54-fb7f-4e2e-9ffa-5ea58cb5716f" />
+
 
 ---
 
@@ -388,7 +392,9 @@ cat reports/final_summary_report.csv
 
 **Figure 18 — Terminal: TritonRoute “0 violations”, GDS file locations and the final summary report values**
 
-![Routing stats](SCREENSHOTS/Routing%20stats.png)
+![Routing stats]
+<img width="1856" height="907" alt="Routing stats" src="https://github.com/user-attachments/assets/a3c2c82f-1562-41a8-ab07-54168b9175b7" />
+
 
 ---
 
@@ -414,7 +420,9 @@ cat reports/routing/41-antenna.rpt | tail -5     # antenna check
 
 **Figure 19 — Fully routed layout (`hand_dryer_controller.def`)**
 
-![Routed DEF](SCREENSHOTS/hand_dryer_controller.def.png)
+![Routed DEF]
+<img width="2048" height="2048" alt="hand_dryer_controller def" src="https://github.com/user-attachments/assets/3358500e-4f57-4eda-a513-9410565b2835" />
+
 
 ---
 
@@ -463,29 +471,41 @@ grep -H -E 'worst slack|^tns' STA_RERUN/practical/*.log
 
 **Figure 20 — 16-corner summary table (setup and hold, ideal/practical)**
 
-![16 corner STA results](SCREENSHOTS/16%20corner%20sta%20results.png)
+![16 corner STA results]
+<img width="886" height="876" alt="16 corner sta results" src="https://github.com/user-attachments/assets/e3cb49f0-7d6c-4049-b2f9-4edecfef4ff1" />
+
 
 **Figure 21 — Ideal vs practical results side by side**
 
-![STA ideal vs practical](SCREENSHOTS/sta%20results%20ideal%20vs%20practical.png)
+![STA ideal vs practical]
+<img width="627" height="610" alt="sta results ideal vs practical" src="https://github.com/user-attachments/assets/64d3f3e5-c9cb-411e-962a-6073e9db91f7" />
+
 
 *(`SCREENSHOTS/sta results udeal vs practical.png` is a byte-identical duplicate of Figure 21 with a typo in the file name.)*
 
 **Figure 22 — Output of `sta_all.sh` (setup/hold worst slack for every corner, ideal-clock run)**
 
-![STA worst slack](SCREENSHOTS/sta_worst_slack.png)
+![STA worst slack]
+<img width="882" height="752" alt="sta_worst_slack" src="https://github.com/user-attachments/assets/baa1f3ef-4bc8-44bb-84f2-e2d5b0ee0fda" />
+
 
 **Figure 23 — TT corner (25 °C, 1.80 V) summary: setup +15.05 ns, hold +0.27 ns, TNS 0.00**
 
-![STA TT corner](SCREENSHOTS/sta%20tt%20croner.png)
+![STA TT corner]
+<img width="1920" height="1080" alt="sta tt croner" src="https://github.com/user-attachments/assets/4ddcd0df-587e-446c-bfa3-3166238359fd" />
+
 
 **Figure 24 — TT corner timing paths: setup path `_76_` → `dryer_enable` (output), hold path `_76_` → `_77_`**
 
-![STA timing path](SCREENSHOTS/sta%20timing%20path.png)
+![STA timing path]
+<img width="856" height="827" alt="sta timing path" src="https://github.com/user-attachments/assets/d79d707d-b314-4e87-893c-0adb9de0039e" />
+
 
 **Figure 25 — Screenshot saved under a misleading filename.** Its caption in the original evidence identifies a TT-corner path, while the filename refers to the SS −40 °C / 1.28 V corner. For the actual worst setup result (+5.35 ns practical), use the text report `STA_EVIDENCE/STA_RERUN/practical/ss_n40C_1v28.log` rather than relying on this screenshot filename.
 
-![STA worst setup path](STA_EVIDENCE/SCREENSHOTS/STA_SS_N40C_1V28_Worst_Setup_Path.png.png)
+![STA worst setup path]
+<img width="1920" height="918" alt="STA_SS_N40C_1V28_Worst_Setup_Path png" src="https://github.com/user-attachments/assets/626f9b1c-bcf2-4fe8-bf61-a6aa2aba5672" />
+
 
 ---
 
@@ -519,19 +539,25 @@ magic -T $PDK_ROOT/sky130A/libs.tech/magic/sky130A.tech
 
 **Figure 26 — Final layout rendered from the Magic GDS**
 
-![Magic GDS](SCREENSHOTS/hand_dryer_controller.magic_gds.png)
+![Magic GDS]
+<img width="2048" height="2048" alt="hand_dryer_controller magic_gds" src="https://github.com/user-attachments/assets/9b19d21c-01d7-4825-aa78-8a18f538a38c" />
+
 
 **Figure 27 — Final layout rendered from the KLayout GDS**
 
-![KLayout GDS](SCREENSHOTS/hand_dryer_controller.gds.png)
+![KLayout GDS]!
+[Uploading hand_dryer_controller.gds.png…]()
+
 
 **Figure 28 — XOR GDS render (difference layout between the Magic and KLayout GDS files)**
 
-![XOR GDS](SCREENSHOTS/hand_dryer_controller.xor.gds.png)
+![XOR GDS]<img width="2048" height="2048" alt="hand_dryer_controller xor gds" src="https://github.com/user-attachments/assets/59e4c116-2d15-4830-804a-71ecc9ae60af" />
+
 
 **Figure 29 — Magic GUI with the final layout loaded: toolbar shows `DRC=0`**
 
-![Magic DRC](SCREENSHOTS/magic_drc_layout.png)
+![Magic DRC]<img width="955" height="905" alt="magic_drc_layout" src="https://github.com/user-attachments/assets/45c1f33d-d7ff-45c9-8cf5-418a28486922" />
+
 
 ---
 
