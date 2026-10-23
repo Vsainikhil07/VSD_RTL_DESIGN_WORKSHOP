@@ -4,7 +4,7 @@
 
 Watch the complete project demonstration:
 
-[Watch Project Demonstration Video on Google Drive](https://drive.google.com/file/d/13fieYxoLk4f7tm7dOlQWfu6Ah_aosvdK/view)
+[Watch Project Demonstration Video on Google Drive](https://drive.google.com/file/d/13fieYxoLk4f7tm7dOlQWfu6Ah_aosvdK/view?usp=sharing)
 
 ### Topics Covered
 - Verilog RTL design and functional verification
